@@ -1,0 +1,8 @@
+Capstone.xs
+Changes
+Makefile.PL
+MANIFEST
+ppport.h
+README
+t/Capstone.t
+lib/Capstone.pm
