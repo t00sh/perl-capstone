@@ -1,10 +1,11 @@
 Capstone.xs
-Changes
 Makefile.PL
-MANIFEST
 ppport.h
-README
 t/Capstone.t
 t/x86_Capstone.t
 lib/Capstone.pm
 lib/Capstone_const.pm
+CHANGES
+README
+LICENSE
+MANIFEST
