@@ -120,6 +120,7 @@ disasm(handle,code,address,count)
            hv_store(hash, "address", 7, newSVuv(insn[i].address), 0);
            hv_store(hash, "mnemonic", 8, newSVpv(insn[i].mnemonic, strlen(insn[i].mnemonic)), 0);
            hv_store(hash, "op_str", 6, newSVpv(insn[i].op_str, strlen(insn[i].op_str)), 0);
+           hv_store(hash, "bytes", 5, newSVpv(insn[i].bytes, insn[i].size), 0);
            PUSHs(newRV_noinc((SV *)hash) );
         }
 
