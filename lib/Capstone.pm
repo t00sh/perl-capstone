@@ -65,7 +65,7 @@ Capstone - Perl extension for capstone-engine
   use Capstone ':all';
 
   $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64) || die "Can't init Capstone\n";
-  @insn = $cs->dis("\x4c\x8d\x25\xee\xa6\x20\x00jdslaaaaaaa", 0xFFFFFFFF, 0);
+  @insn = $cs->dis("\x4c\x8d\x25\xee\xa6\x20\x00\x90\xcd\x80", 0x040000a, 0);
 
   foreach(@insn) {
     printf "0x%.16x    %s %s\n", $_->{address}, $_->{mnemonic}, $_->{op_str};
