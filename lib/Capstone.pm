@@ -7,7 +7,6 @@ use warnings;
 require Capstone_const;
 require Exporter;
 
-our $VERSION = '0.1';
 our @ISA = qw(Exporter);
 
 # Items to export into callers namespace by default. Note: do not export
@@ -25,7 +24,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.1';
 
 require XSLoader;
 XSLoader::load('Capstone', $VERSION);
@@ -67,7 +66,7 @@ Capstone - Perl extension for capstone-engine
 
 =head1 SYNOPSIS
 
-  use Capstone 'all';
+  use Capstone ':all';
 
   $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64) || die "Can't init Capstone\n";
   @insn = $cs->dis("\x4c\x8d\x25\xee\xa6\x20\x00jdslaaaaaaa", 0xFFFFFFFF, 0);
