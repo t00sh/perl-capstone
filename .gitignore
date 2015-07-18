@@ -2,6 +2,7 @@
 *.o
 *.old
 *.c
+*.bs
 MYMETA.json
 MYMETA.yml
 Makefile
