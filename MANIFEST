@@ -6,3 +6,4 @@ ppport.h
 README
 t/Capstone.t
 lib/Capstone.pm
+lib/Capstone_const.pm

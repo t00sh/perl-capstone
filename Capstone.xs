@@ -108,7 +108,6 @@ disasm(handle,code,address,count)
         cs_insn *insn;
 
     PPCODE:
-        printf("%p\n", handle);
         if(SvTYPE(code) != SVt_PV) {
             croak("<code> argument not an array scalar");
         }
