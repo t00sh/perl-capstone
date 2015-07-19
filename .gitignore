@@ -3,6 +3,7 @@
 *.old
 *.c
 *.bs
+*.zip
 MYMETA.json
 MYMETA.yml
 Makefile
