@@ -25,7 +25,7 @@ echo ""
 echo "~~~~~~~~~~~~ CPAN ~~~~~~~~~~~~~~"
 echo "[+] Genere CPAN archive"
 cmd_to_devnull scripts/gen_cpan_zip.sh
-echo "[+] You can upload pkgs/cpan/Capstone.zip to : https://pause.perl.org/pause/authenquery?ACTION=add_uri"
+echo "[+] You can upload pkgs/cpan/Capstone-$1.zip to : https://pause.perl.org/pause/authenquery?ACTION=add_uri"
 
 echo ""
 echo ""
