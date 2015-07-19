@@ -42,7 +42,7 @@ cmd_to_devnull mksrcinfo
 cmd_to_devnull git add PKGBUILD .SRCINFO
 cmd_to_devnull git commit -m v$1
 cmd_to_devnull git push
-cmd_to_devnull makepkg --source
+cmd_to_devnull makepkg -f --source
 
 echo "[+] You can upload pkg/archlinux/*.src.tar.gz to : https://aur.archlinux.org/submit/"
 
