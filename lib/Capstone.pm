@@ -130,6 +130,15 @@ Disassemble code, and return a list of disassembled instructions.
 
 See cs_disasm() in capstone-engine documentation.
 
+
+  foreach(@ins) {
+    printf "%.16x  %-32s %s %s\n",
+           $_->{address},
+           hexlify($_->{bytes}),
+           $_->{mnemonic},
+           $_->{op_str};
+  }
+
 An instruction is represented with a hash ref, with fields :
 
 =over 4

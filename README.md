@@ -69,6 +69,14 @@ Further information is available at http://www.capstone-engine.org
 
     See cs\_disasm() in capstone-engine documentation.
 
+        foreach(@ins) {
+          printf "%.16x  %-32s %s %s\n",
+                 $_->{address},
+                 hexlify($_->{bytes}),
+                 $_->{mnemonic},
+                 $_->{op_str};
+        }
+
     An instruction is represented with a hash ref, with fields :
 
     - {address}
