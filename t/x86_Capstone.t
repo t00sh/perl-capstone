@@ -22,7 +22,7 @@ my @ins;
 # Testing CS_MODE_32
 ok($cs = Capstone->new(CS_ARCH_X86, CS_MODE_32));
 
-ok(scalar((@ins = $cs->dis("\x90\x90\xcd\x80", 0xdead, 0))) == 3);
+ok(scalar((@ins = $cs->dis("\x90\x90\xcd\x80"))) == 3);
 
 ok($ins[0]{mnemonic} eq 'nop');
 
@@ -47,3 +47,5 @@ ok($ins[0]{op_str} eq 'rsp, 8');
 
 ok($ins[1]{address} == 0x10000003); 
 ok($cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT));
+
+    

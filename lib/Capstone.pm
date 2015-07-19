@@ -43,6 +43,9 @@ sub new {
 sub dis {
     my ($this, $code, $address, $num) = @_;
 
+    $num = 0 if !defined($num);
+    $address = 0 if !defined($address);
+  
     return Capstone::disasm($this->{handle}, $code, $address, $num);
 }
 
