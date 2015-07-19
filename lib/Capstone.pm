@@ -114,6 +114,43 @@ Further information is available at http://www.capstone-engine.org
 
 http://capstone-engine.org/
 
+=head2 Exportable methods
+
+=over 4
+
+=item new(arch, mode)
+
+Constructor of cshPtr object.
+Take two arguments, the arch (CS_ARCH_*) and the mode (CS_MODE_*).
+See capstone-engine documentation
+
+=item dis(code, address, num)
+
+Disassemble code, and return at least num instructions.
+Set num to 0 if you want disassemble all the code.
+
+Instructions start at address <address>
+
+See capstone-engine documentation.
+
+=back
+
+=head2 Exportable functions
+
+=over 4 
+
+=item version()
+
+Return a list of two scalars, the first is the major version, and the second
+is the minor version
+
+=item support(value)
+
+Test if the library support an architecture.
+Use CS_ARCH_* constant (see capstone documentation)
+
+=back
+
 =head1 AUTHOR
 
 Tosh, E<lt>tosh@t0x0sh.orgE<gt>

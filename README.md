@@ -55,6 +55,35 @@ Further information is available at http://www.capstone-engine.org
 
 http://capstone-engine.org/
 
+## Exportable methods
+
+- new(arch, mode)
+
+    Constructor of cshPtr object.
+    Take two arguments, the arch (CS\_ARCH\_\*) and the mode (CS\_MODE\_\*).
+    See capstone-engine documentation
+
+- dis(code, address, num)
+
+    Disassemble code, and return at least num instructions.
+    Set num to 0 if you want disassemble all the code.
+
+    Instructions start at address <address>
+
+    See capstone-engine documentation.
+
+## Exportable functions
+
+- version()
+
+    Return a list of two scalars, the first is the major version, and the second
+    is the minor version
+
+- support(value)
+
+    Test if the library support an architecture.
+    Use CS\_ARCH\_\* constant (see capstone documentation)
+
 # AUTHOR
 
 Tosh, <tosh@t0x0sh.org>
