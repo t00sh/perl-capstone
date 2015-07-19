@@ -50,9 +50,6 @@ DESCRIPTION
 
     Further information is available at http://www.capstone-engine.org
 
-SEE ALSO
-    http://capstone-engine.org/
-
   Exportable methods
     new(arch, mode)
         Constructor of cshPtr object. Take two arguments, the arch
@@ -75,6 +72,9 @@ SEE ALSO
     support(value)
         Test if the library support an architecture. Use CS_ARCH_* constant
         (see capstone documentation)
+
+SEE ALSO
+    http://capstone-engine.org/
 
 AUTHOR
     Tosh, <tosh@t0x0sh.org>

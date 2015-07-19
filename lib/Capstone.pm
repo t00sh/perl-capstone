@@ -110,10 +110,6 @@ Capstone offers some unparalleled features:
 
 Further information is available at http://www.capstone-engine.org
 
-=head1 SEE ALSO
-
-http://capstone-engine.org/
-
 =head2 Exportable methods
 
 =over 4
@@ -150,6 +146,10 @@ Test if the library support an architecture.
 Use CS_ARCH_* constant (see capstone documentation)
 
 =back
+
+=head1 SEE ALSO
+
+http://capstone-engine.org/
 
 =head1 AUTHOR
 

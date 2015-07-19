@@ -51,10 +51,6 @@ Capstone offers some unparalleled features:
 
 Further information is available at http://www.capstone-engine.org
 
-# SEE ALSO
-
-http://capstone-engine.org/
-
 ## Exportable methods
 
 - new(arch, mode)
@@ -83,6 +79,10 @@ http://capstone-engine.org/
 
     Test if the library support an architecture.
     Use CS\_ARCH\_\* constant (see capstone documentation)
+
+# SEE ALSO
+
+http://capstone-engine.org/
 
 # AUTHOR
 
