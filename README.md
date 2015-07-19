@@ -51,38 +51,74 @@ Capstone offers some unparalleled features:
 
 Further information is available at http://www.capstone-engine.org
 
-## Exportable methods
+## METHODS
 
 - new(arch, mode)
 
-    Constructor of cshPtr object.
+        $cs = Capstone->new(CS_ARCH_X86, CS_MODE_32);    
+
+    Create a new capstone object.
     Take two arguments, the arch (CS\_ARCH\_\*) and the mode (CS\_MODE\_\*).
-    See capstone-engine documentation
+    See cs\_open() in capstone-engine documentation
 
 - dis(code, address, num)
 
-    Disassemble code, and return at least num instructions.
-    Set num to 0 if you want disassemble all the code.
+        @ins = $cs->dis("\xcd\x80", 0x080480bc, 1);
 
-    Instructions start at address <address>
+    Disassemble code, and return a list of disassembled instructions.
 
-    See capstone-engine documentation.
+    See cs\_disasm() in capstone-engine documentation.
 
-## Exportable functions
+    An instruction is represented with a hash ref, with fields :
+
+    - {address}
+
+        The address of the instruction
+
+    - {mnemonic}
+
+        The mnemonic of the instruction
+
+    - {op\_str}
+
+        The operand string of the instruction
+
+    - {bytes}
+
+        The raw bytes of the instruction
+
+- set\_option(type, value)
+
+        $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT);
+
+    Change the disassembly behavior.
+
+    See cs\_option() in capstone-engine documentation.
+
+## FUNCTIONS
 
 - version()
+
+        ($maj, $min) = Capstone::version();
 
     Return a list of two scalars, the first is the major version, and the second
     is the minor version
 
+    See cs\_version() in capstone-engine documentation.
+
 - support(value)
+
+        print "CS_ARCH_ALL supported\n" if(Capstone::support(CS_ARCH_ALL));
 
     Test if the library support an architecture.
     Use CS\_ARCH\_\* constant (see capstone documentation)
 
+    See cs\_support() in capstone-engine documentation.
+
 # SEE ALSO
 
 http://capstone-engine.org/
+https://github.com/t00sh/capstone-perl
 
 # AUTHOR
 

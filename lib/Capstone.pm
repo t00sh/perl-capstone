@@ -110,46 +110,86 @@ Capstone offers some unparalleled features:
 
 Further information is available at http://www.capstone-engine.org
 
-=head2 Exportable methods
+=head2 METHODS
 
 =over 4
 
 =item new(arch, mode)
 
-Constructor of cshPtr object.
+  $cs = Capstone->new(CS_ARCH_X86, CS_MODE_32);    
+
+Create a new capstone object.
 Take two arguments, the arch (CS_ARCH_*) and the mode (CS_MODE_*).
-See capstone-engine documentation
+See cs_open() in capstone-engine documentation
 
 =item dis(code, address, num)
 
-Disassemble code, and return at least num instructions.
-Set num to 0 if you want disassemble all the code.
+  @ins = $cs->dis("\xcd\x80", 0x080480bc, 1);
 
-Instructions start at address <address>
+Disassemble code, and return a list of disassembled instructions.
 
-See capstone-engine documentation.
+See cs_disasm() in capstone-engine documentation.
+
+An instruction is represented with a hash ref, with fields :
+
+=over 4
+
+=item {address}
+
+The address of the instruction
+
+=item {mnemonic}
+
+The mnemonic of the instruction
+
+=item {op_str}
+
+The operand string of the instruction
+
+=item {bytes}
+
+The raw bytes of the instruction
 
 =back
 
-=head2 Exportable functions
+=item set_option(type, value)
+
+  $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT);
+
+Change the disassembly behavior.
+
+See cs_option() in capstone-engine documentation.
+
+=back
+
+=head2 FUNCTIONS
 
 =over 4 
 
 =item version()
 
+  ($maj, $min) = Capstone::version();
+
 Return a list of two scalars, the first is the major version, and the second
 is the minor version
 
+See cs_version() in capstone-engine documentation.
+
 =item support(value)
+
+  print "CS_ARCH_ALL supported\n" if(Capstone::support(CS_ARCH_ALL));
 
 Test if the library support an architecture.
 Use CS_ARCH_* constant (see capstone documentation)
+
+See cs_support() in capstone-engine documentation.
 
 =back
 
 =head1 SEE ALSO
 
 http://capstone-engine.org/
+https://github.com/t00sh/capstone-perl
 
 =head1 AUTHOR
 
