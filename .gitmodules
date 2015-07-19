@@ -1,0 +1,3 @@
+[submodule "pkgs/archlinux"]
+	path = pkgs/archlinux
+	url = ssh+git://aur@aur4.archlinux.org/perl-capstone.git
