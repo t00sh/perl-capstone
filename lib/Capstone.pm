@@ -19,7 +19,7 @@ our %EXPORT_TAGS = ( 'all' =>
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 require XSLoader;
 XSLoader::load('Capstone', $VERSION);
@@ -195,9 +195,54 @@ See cs_support() in capstone-engine documentation.
 
 =back
 
+=head2 EXAMPLES
+
+  #!/usr/bin/perl
+
+  use ExtUtils::testlib;
+  use Capstone ':all';
+    
+  use strict;
+  use warnings;
+
+  my $CODE = "\x4c\x8d\x25\xee\xa6\x20\x00\x90\x90\xcd\x80";
+  my $ADDRESS = 0x040000;
+
+  printf "Capstone version %d.%d\n", Capstone::version();
+  print "Support ARCH_ALL : " . Capstone::support(CS_ARCH_ALL) . "\n\n";
+
+  print "[+] Create disassembly engine\n";
+  my $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64) 
+      || die "[-] Can't create capstone object\n";
+
+  print "[+] Set AT&T syntax\n";
+  $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT) 
+      || die "[-] Can't set CS_OPT_SYNTAX_ATT option\n";
+
+  print "[+] Disassemble some code\n\n";
+  my @insn = $cs->dis($CODE, $ADDRESS, 0);
+
+  foreach(@insn) {
+      printf "    0x%.16x  %-30s   %s %s\n",
+      $_->{address},
+      hexlify($_->{bytes}),
+      $_->{mnemonic}, 
+      $_->{op_str};
+  }
+
+  print "[+] " . scalar(@insn) . " instructions disassembled\n";
+
+
+  sub hexlify {
+      my $bytes = shift;
+
+      return join ' ', map { sprintf "%.2x", ord($_) } split //, $bytes;
+  }
+
 =head1 SEE ALSO
 
 http://capstone-engine.org/
+
 https://github.com/t00sh/perl-capstone
 
 =head1 AUTHOR
