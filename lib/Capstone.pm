@@ -198,7 +198,7 @@ See cs_support() in capstone-engine documentation.
 =head1 SEE ALSO
 
 http://capstone-engine.org/
-https://github.com/t00sh/capstone-perl
+https://github.com/t00sh/perl-capstone
 
 =head1 AUTHOR
 

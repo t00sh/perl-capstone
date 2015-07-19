@@ -112,7 +112,7 @@ DESCRIPTION
         See cs_support() in capstone-engine documentation.
 
 SEE ALSO
-    http://capstone-engine.org/ https://github.com/t00sh/capstone-perl
+    http://capstone-engine.org/ https://github.com/t00sh/perl-capstone
 
 AUTHOR
     Tosh, <tosh@t0x0sh.org>

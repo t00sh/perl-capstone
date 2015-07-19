@@ -1,23 +1,23 @@
 /****************************************************************************/
-/* capstone-perl - A Perl wrapper for the capstone-engine library           */
+/* perl-capstone - A Perl wrapper for the capstone-engine library           */
 /*                                                                          */
 /* Copyright 2015, -TOSH-                                                   */
 /* File coded by -TOSH-                                                     */
 /*                                                                          */
-/* This file is part of capstone-perl.                                      */
+/* This file is part of perl-capstone.                                      */
 /*                                                                          */
-/* capstone-perl is free software: you can redistribute it and/or modify    */
+/* perl-capstone is free software: you can redistribute it and/or modify    */
 /* it under the terms of the GNU General Public License as published by     */
 /* the Free Software Foundation, either version 3 of the License, or        */
 /* (at your option) any later version.                                      */
 /*                                                                          */
-/* capstone-perl is distributed in the hope that it will be useful,         */
+/* perl-capstone is distributed in the hope that it will be useful,         */
 /* but WITHOUT ANY WARRANTY; without even the implied warranty of           */
 /* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            */
 /* GNU General Public License for more details.                             */
 /*                                                                          */
 /* You should have received a copy of the GNU General Public License        */
-/* along with capstone-perl.  If not, see <http://www.gnu.org/licenses/>    */
+/* along with perl-capstone.  If not, see <http://www.gnu.org/licenses/>    */
 /****************************************************************************/
 
 /* Perl XS wrapper for capstone-engine */
@@ -44,9 +44,9 @@ csh_DESTROY(handle)
         Safefree(handle);
 
 
-    
+
 MODULE = Capstone   PACKAGE = Capstone
-    
+
 # Wrapper to cs_open()
 csh*
 open(arch,mode)
