@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ZIP_ARCHIVE="cpan/Capstone.zip"
+ZIP_ARCHIVE="pkgs/cpan/Capstone.zip"
 
 zip $ZIP_ARCHIVE $(cat MANIFEST)
 
