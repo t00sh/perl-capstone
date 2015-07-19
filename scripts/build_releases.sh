@@ -39,6 +39,7 @@ SHA_SUMS=$(makepkg -g 2>/dev/null)
 sed -i -r "s/sha256sums=.+/$SHA_SUMS/g" PKGBUILD
 
 cmd_to_devnull mksrcinfo
+cmd_to_devnull chmod 0644 PKGBUILD .SRCINFO
 cmd_to_devnull git add PKGBUILD .SRCINFO
 git commit -m v$1 >/dev/null 2>/dev/null
 cmd_to_devnull git push
