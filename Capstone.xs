@@ -95,12 +95,12 @@ option(handle,type,value)
 
 # Wrapper to cs_disasm()
 SV*
-disasm(handle,code,address,count)
+disasm(handle,code,address,count,details)
     csh *handle
     SV *code
     UV address
     size_t count
-
+    int details
 
     PREINIT:
         size_t ret, i;
@@ -115,12 +115,45 @@ disasm(handle,code,address,count)
         ret = cs_disasm(*handle, SvPVbyte(code, SvCUR(code)), SvCUR(code), address, count, &insn);
 
         for(i = 0; i < ret; i++) {
-           hash = newHV();
-           hv_store(hash, "address", 7, newSVuv(insn[i].address), 0);
-           hv_store(hash, "mnemonic", 8, newSVpv(insn[i].mnemonic, strlen(insn[i].mnemonic)), 0);
-           hv_store(hash, "op_str", 6, newSVpv(insn[i].op_str, strlen(insn[i].op_str)), 0);
-           hv_store(hash, "bytes", 5, newSVpv(insn[i].bytes, insn[i].size), 0);
-           PUSHs(newRV_noinc((SV *)hash) );
+            hash = newHV();
+
+            hv_store(hash, "id", 2, newSVuv(insn[i].id), 0);
+            hv_store(hash, "address", 7, newSVuv(insn[i].address), 0);
+            hv_store(hash, "mnemonic", 8, newSVpv(insn[i].mnemonic, strlen(insn[i].mnemonic)), 0);
+            hv_store(hash, "op_str", 6, newSVpv(insn[i].op_str, strlen(insn[i].op_str)), 0);
+            hv_store(hash, "bytes", 5, newSVpv(insn[i].bytes, insn[i].size), 0);
+
+            if(details) {
+                HV *details_hash;
+                AV *regs_read, *regs_write, *groups;
+                int j;
+
+                regs_read = newAV();
+
+                for(j = 0; j < insn[i].detail->regs_read_count; j++) {
+                    av_push(regs_read, newSVuv(insn[i].detail->regs_read[j]));
+                }
+
+                regs_write = newAV();
+
+                for(j = 0; j < insn[i].detail->regs_write_count; j++) {
+                    av_push(regs_write, newSVuv(insn[i].detail->regs_write[j]));
+                }
+
+                groups = newAV();
+
+                for(j = 0; j < insn[i].detail->groups_count; j++) {
+                    av_push(groups, newSVuv(insn[i].detail->groups[j]));
+                }
+
+                details_hash = newHV();
+                hv_store(details_hash, "regs_read", 9, newRV_noinc((SV*)regs_read), 0);
+                hv_store(details_hash, "regs_write", 10, newRV_noinc((SV*)regs_write), 0);
+                hv_store(details_hash, "groups", 6, newRV_noinc((SV*)groups), 0);
+                hv_store(hash, "details", 7, newRV_noinc((SV*)details_hash), 0);
+            }
+
+            PUSHs(newRV_noinc((SV *)hash) );
         }
 
         if(ret) {
@@ -150,6 +183,71 @@ support(query)
 
     CODE:
         RETVAL = cs_support(query);
+
+    OUTPUT:
+        RETVAL
+
+# Wrapper to cs_reg_name()
+SV*
+cs_reg_name(handle, reg_id)
+    csh *handle
+    unsigned int reg_id
+
+
+    PREINIT:
+        const char *ret;
+
+    CODE:
+        ret = cs_reg_name(*handle, reg_id);
+
+        if(ret == NULL) {
+            RETVAL = newSVpv("", 0);
+        } else {
+            RETVAL = newSVpv(ret, strlen(ret));
+        }
+    OUTPUT:
+        RETVAL
+
+# Wrapper to cs_insn_name()
+SV*
+cs_insn_name(handle, insn_id)
+    csh *handle
+    unsigned int insn_id
+
+
+    PREINIT:
+        const char *ret;
+
+    CODE:
+        ret = cs_insn_name(*handle, insn_id);
+
+         if(ret == NULL) {
+            RETVAL = newSVpv("", 0);
+        } else {
+            RETVAL = newSVpv(ret, strlen(ret));
+        }
+
+    OUTPUT:
+        RETVAL
+
+# Wrapper to cs_group_name()
+SV*
+cs_group_name(handle, group_id)
+    csh *handle
+    unsigned int group_id
+
+
+    PREINIT:
+        const char *ret;
+
+    CODE:
+        ret = cs_group_name(*handle, group_id);
+
+         if(ret == NULL) {
+            RETVAL = newSVpv("", 0);
+        } else {
+            RETVAL = newSVpv(ret, strlen(ret));
+        }
 
     OUTPUT:
         RETVAL
