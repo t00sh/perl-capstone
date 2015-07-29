@@ -28,7 +28,7 @@ if test ! -d pkgs/cpan
 then
     mkdir pkgs/cpan
 fi
-cmd_to_devnull scripts/gen_cpan_zip.sh
+cmd_to_devnull scripts/gen_cpan_zip.sh $1
 echo "[+] You can upload pkgs/cpan/Capstone-$1.zip to : https://pause.perl.org/pause/authenquery?ACTION=add_uri"
 
 echo ""
