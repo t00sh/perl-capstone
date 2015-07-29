@@ -1,7 +1,7 @@
 Capstone.xs
 Makefile.PL
 ppport.h
-MYMETA.ylm
+MYMETA.yml
 t/Capstone.t
 t/x86_Capstone.t
 lib/Capstone.pm
