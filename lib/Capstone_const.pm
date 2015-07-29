@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use constant {
     CS_ARCH_ARM   => 0,
     CS_ARCH_ARM64 => 1,
