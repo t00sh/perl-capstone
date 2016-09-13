@@ -29,7 +29,11 @@
 
 #include "ppport.h"
 
+#ifdef CAPSTONE_FROM_PKGCONFIG
+#include <capstone.h>
+#else
 #include <capstone/capstone.h>
+#endif
 
 
 MODULE = Capstone   PACKAGE = cshPtr  PREFIX = csh_
