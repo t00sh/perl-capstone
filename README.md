@@ -55,7 +55,7 @@ Further information is available at http://www.capstone-engine.org
 
 - new(arch, mode)
 
-        $cs = Capstone->new(CS_ARCH_X86, CS_MODE_32);    
+        $cs = Capstone->new(CS_ARCH_X86, CS_MODE_32);
 
     Create a new capstone object.
     Take two arguments, the arch (CS\_ARCH\_\*) and the mode (CS\_MODE\_\*).
@@ -95,6 +95,18 @@ Further information is available at http://www.capstone-engine.org
 
         The raw bytes of the instruction
 
+    - {regs\_read}
+
+        If CS\_OPT\_DETAILS is set, it is a list of implicit registers read.
+
+    - {regs\_write}
+
+        If CS\_OPT\_DETAILS is set, it is a list of implicit registers modified.
+
+    - {groups}
+
+        If CS\_OPT\_DETAILS is set, it is a list of group the instruction belong to.
+
 - set\_option(type, value)
 
         $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT);
@@ -129,7 +141,7 @@ Further information is available at http://www.capstone-engine.org
 
     use ExtUtils::testlib;
     use Capstone ':all';
-      
+
     use strict;
     use warnings;
 
@@ -140,11 +152,11 @@ Further information is available at http://www.capstone-engine.org
     print "Support ARCH_ALL : " . Capstone::support(CS_ARCH_ALL) . "\n\n";
 
     print "[+] Create disassembly engine\n";
-    my $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64) 
+    my $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64)
         || die "[-] Can't create capstone object\n";
 
     print "[+] Set AT&T syntax\n";
-    $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT) 
+    $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT)
         || die "[-] Can't set CS_OPT_SYNTAX_ATT option\n";
 
     print "[+] Disassemble some code\n\n";
@@ -154,7 +166,7 @@ Further information is available at http://www.capstone-engine.org
         printf "    0x%.16x  %-30s   %s %s\n",
         $_->{address},
         hexlify($_->{bytes}),
-        $_->{mnemonic}, 
+        $_->{mnemonic},
         $_->{op_str};
     }
 
@@ -177,11 +189,15 @@ https://github.com/t00sh/perl-capstone
 
 Tosh, <tosh@t0x0sh.org>
 
+# CONTRIBUTORS
+
+Vikas N Kumar <vikas@cpan.org>
+
 # COPYRIGHT AND LICENSE
 
-Copyright (C) 2015 by Tosh
+Copyright (C) 2015-2016 by Tosh
 
 This library is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.                              
+(at your option) any later version.

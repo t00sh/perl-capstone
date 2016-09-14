@@ -87,6 +87,18 @@ DESCRIPTION
         {bytes}
             The raw bytes of the instruction
 
+        {regs_read}
+            If CS_OPT_DETAILS is set, it is a list of implicit registers
+            read.
+
+        {regs_write}
+            If CS_OPT_DETAILS is set, it is a list of implicit registers
+            modified.
+
+        {groups}
+            If CS_OPT_DETAILS is set, it is a list of group the instruction
+            belong to.
+
     set_option(type, value)
           $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT);
 
@@ -116,7 +128,7 @@ DESCRIPTION
 
       use ExtUtils::testlib;
       use Capstone ':all';
-    
+
       use strict;
       use warnings;
 
@@ -127,11 +139,11 @@ DESCRIPTION
       print "Support ARCH_ALL : " . Capstone::support(CS_ARCH_ALL) . "\n\n";
 
       print "[+] Create disassembly engine\n";
-      my $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64) 
+      my $cs = Capstone->new(CS_ARCH_X86, CS_MODE_64)
           || die "[-] Can't create capstone object\n";
 
       print "[+] Set AT&T syntax\n";
-      $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT) 
+      $cs->set_option(CS_OPT_SYNTAX, CS_OPT_SYNTAX_ATT)
           || die "[-] Can't set CS_OPT_SYNTAX_ATT option\n";
 
       print "[+] Disassemble some code\n\n";
@@ -141,7 +153,7 @@ DESCRIPTION
           printf "    0x%.16x  %-30s   %s %s\n",
           $_->{address},
           hexlify($_->{bytes}),
-          $_->{mnemonic}, 
+          $_->{mnemonic},
           $_->{op_str};
       }
 
@@ -162,8 +174,11 @@ SEE ALSO
 AUTHOR
     Tosh, <tosh@t0x0sh.org>
 
+CONTRIBUTORS
+    Vikas N Kumar <vikas@cpan.org>
+
 COPYRIGHT AND LICENSE
-    Copyright (C) 2015 by Tosh
+    Copyright (C) 2015-2016 by Tosh
 
     This library is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
