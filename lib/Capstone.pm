@@ -56,14 +56,13 @@ sub dis {
 
     if($details) {
         foreach my $i(@ins) {
-            my $d = $i->{details};
 
-            @{ $d->{regs_read} } =
-                map { Capstone::cs_reg_name($this->{_handle}, $_) } @{ $d->{regs_read} };
-            @{ $d->{regs_write} } =
-                map { Capstone::cs_reg_name($this->{_handle}, $_) } @{ $d->{regs_write} };
-            @{ $d->{groups} } =
-                map { Capstone::cs_group_name($this->{_handle}, $_) } @{ $d->{groups} };
+            @{ $i->{regs_read} } =
+                map { Capstone::cs_reg_name($this->{_handle}, $_) } @{ $i->{regs_read} };
+            @{ $i->{regs_write} } =
+                map { Capstone::cs_reg_name($this->{_handle}, $_) } @{ $i->{regs_write} };
+            @{ $i->{groups} } =
+                map { Capstone::cs_group_name($this->{_handle}, $_) } @{ $i->{groups} };
         }
     }
 
@@ -197,6 +196,18 @@ The operand string of the instruction
 
 The raw bytes of the instruction
 
+=item {regs_read}
+
+If CS_OPT_DETAILS is set, it is a list of implicit registers read.
+
+=item {regs_write}
+
+If CS_OPT_DETAILS is set, it is a list of implicit registers modified.
+
+=item {groups}
+
+If CS_OPT_DETAILS is set, it is a list of group the instruction belong to.
+
 =back
 
 =item set_option(type, value)
@@ -287,9 +298,13 @@ https://github.com/t00sh/perl-capstone
 
 Tosh, E<lt>tosh@t0x0sh.orgE<gt>
 
+=head1 CONTRIBUTORS
+
+Vikas N Kumar E<lt>vikas@cpan.orgE<gt>
+
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2015 by Tosh
+Copyright (C) 2015-2016 by Tosh
 
 This library is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

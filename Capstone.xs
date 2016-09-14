@@ -128,7 +128,6 @@ disasm(handle,code,address,count,details)
             hv_store(hash, "bytes", 5, newSVpv(insn[i].bytes, insn[i].size), 0);
 
             if(details) {
-                HV *details_hash;
                 AV *regs_read, *regs_write, *groups;
                 int j;
 
@@ -150,11 +149,10 @@ disasm(handle,code,address,count,details)
                     av_push(groups, newSVuv(insn[i].detail->groups[j]));
                 }
 
-                details_hash = newHV();
-                hv_store(details_hash, "regs_read", 9, newRV_noinc((SV*)regs_read), 0);
-                hv_store(details_hash, "regs_write", 10, newRV_noinc((SV*)regs_write), 0);
-                hv_store(details_hash, "groups", 6, newRV_noinc((SV*)groups), 0);
-                hv_store(hash, "details", 7, newRV_noinc((SV*)details_hash), 0);
+                hv_store(hash, "regs_read", 9, newRV_noinc((SV*)regs_read), 0);
+                hv_store(hash, "regs_write", 10, newRV_noinc((SV*)regs_write), 0);
+                hv_store(hash, "groups", 6, newRV_noinc((SV*)groups), 0);
+
             }
 
             PUSHs(newRV_noinc((SV *)hash) );

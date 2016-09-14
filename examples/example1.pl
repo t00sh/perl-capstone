@@ -29,16 +29,18 @@ print "[+] Disassemble some code\n\n";
 my @insn = $cs->dis($CODE, $ADDRESS, 0);
 
 foreach(@insn) {
-    printf "    0x%.16x  %-30s   %s %s\n",
+    printf "  0x%.16x  %-30s   %s %s\n",
     $_->{address},
     hexlify($_->{bytes}),
     $_->{mnemonic},
     $_->{op_str};
+
+    printf "     Read: %s\n", join(',', @{$_->{regs_read}});
+    printf "     Write: %s\n", join(',', @{$_->{regs_write}});
+    printf "     Groups: %s\n", join(',', @{$_->{groups}});
 }
 
 print "[+] " . scalar(@insn) . " instructions disassembled\n";
-
-print Dumper(\@insn);
 
 sub hexlify {
     my $bytes = shift;
