@@ -3,11 +3,21 @@ use ExtUtils::MakeMaker;
 
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
-my $cflags = `pkg-config --cflags capstone`;
-chomp $cflags if $cflags;
-my $define = '-DCAPSTONE_FROM_PKGCONFIG' if $cflags;
-my $ldflags = `pkg-config --libs capstone` || '-lcapstone';
-chomp $ldflags if $ldflags;
+
+# use Alien::Capstone to install Capstone safely just for Perl usage
+my ($cflags, $ldflags, $define) = ();
+if (eval { require Alien::Capstone; 1 }) {
+    my $capstone = Alien::Capstone->new;
+    $cflags = $capstone->cflags;
+    $ldflags = $capstone->libs;
+    $define = '-DCAPSTONE_FROM_PKGCONFIG';
+} else {
+    $cflags = `pkg-config --cflags capstone`;
+    chomp $cflags if $cflags;
+    $define = '-DCAPSTONE_FROM_PKGCONFIG' if $cflags;
+    $ldflags = `pkg-config --libs capstone` || '-lcapstone';
+    chomp $ldflags if $ldflags;
+}
 
 WriteMakefile(
     NAME              => 'Capstone',
